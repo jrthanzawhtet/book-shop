@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -24,12 +21,13 @@ public class AuthController {
     private final AuthService authService;
     private final CartService cartService;
 
-    @GetMapping()
+    @GetMapping("/register")
     private String register(Model model){
         model.addAttribute("customer", new Customer());
         return "register";
     }
 
+    @PostMapping("/save-customer")
     public String saveCustomer(@RequestParam("billingAddress")String billingAddress,
                                @RequestParam("shippingAddress")String shippingAddress,
                                @RequestParam("payment")PaymentMethod method,
